@@ -5,7 +5,7 @@ require_once(__DIR__ . DIRECTORY_SEPARATOR . 'Tools.php');
 
 $interval = isset($argv[1]) ? intval($argv[1]) : 1;
 
-$f = popen('/usr/bin/iostat -xt ' . $interval, 'r');
+$f = popen('/usr/bin/iostat -xtz ' . $interval, 'r');
 $cols = [];
 $datetime = 0;
 $state = 0; // 1 - cpu, 2 - io
@@ -24,7 +24,8 @@ while ($line = fgets($f)) {
         } else {
             $state = 0;
         }
-    } else {
+    }
+    if ($state == 0) {
         if (preg_match('/(\d{2}.\d{2}.\d{4}\s+\d{2}:\d{2}:\d{2}.*)/', $line, $m)) {
             $datetime = $m[1];
             //echo 'Datetime found: ' . $datetime . PHP_EOL;
