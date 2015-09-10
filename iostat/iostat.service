@@ -1,0 +1,12 @@
+[Unit]
+Description=IO Stat
+
+[Service]
+User=zabbix
+Type=simple
+ExecStart=/etc/zabbix/scripts/iostat/iostat.php 10
+StandardOutput=null
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
