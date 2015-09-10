@@ -5,7 +5,7 @@ require_once(__DIR__ . DIRECTORY_SEPARATOR . 'Tools.php');
 
 $interval = isset($argv[1]) ? intval($argv[1]) : 1;
 
-$f = popen('/usr/bin/iostat -xtz ' . $interval, 'r');
+$f = popen('/usr/bin/iostat -xt ' . $interval, 'r');
 $cols = [];
 $datetime = 0;
 $state = 0; // 1 - cpu, 2 - io
