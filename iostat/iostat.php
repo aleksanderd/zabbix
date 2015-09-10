@@ -25,7 +25,7 @@ while ($line = fgets($f)) {
             $state = 0;
         }
     } else {
-        if (preg_match('/(\d{2}\.\d{2}\.\d{4}\s+\d{2}:\d{2}:\d{2})/', $line, $m)) {
+        if (preg_match('/(\d{2}.\d{2}.\d{4}\s+\d{2}:\d{2}:\d{2}.*)/', $line, $m)) {
             $datetime = $m[1];
             //echo 'Datetime found: ' . $datetime . PHP_EOL;
         } else if (preg_match('/avg-cpu:((\s+%(\w+))+)/', $line, $m)) {
