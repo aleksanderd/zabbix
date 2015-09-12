@@ -4,6 +4,30 @@ class Tools {
 
     const MAX_FILE_SIZE = 777777;
 
+    private static $_params;
+
+    public static function pVal($name = null)
+    {
+        if (!(isset(static::$_params) && is_array(static::$_params))) {
+            if (is_readable($f = __DIR__ . DIRECTORY_SEPARATOR . 'iostat.params.php')) {
+                static::$_params = require_once($f);
+            }
+        }
+        if ($name === null) {
+            return static::$_params;
+        }
+        $parts = explode('.', $name);
+        $value = static::$_params;;
+        foreach ($parts as $p) {
+            if (isset($value[$p])) {
+                $value = $value[$p];
+            } else {
+                return null;
+            }
+        }
+        return $value;
+    }
+
     public static function superTrim($string)
     {
         $result = str_replace(
